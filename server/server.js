@@ -20,6 +20,7 @@ app.get('/', (req, res) => {
 app.get('/species', async (req, res) => {
     try {
       const species = await db.any('SELECT * FROM species');
+      //console.log("Species fetched successfully:", species);
       res.json(species);
     } catch (err) {
       console.error('Error fetching species:', err);
@@ -27,6 +28,24 @@ app.get('/species', async (req, res) => {
     }
   });
   
+  //Get all individuals
+  app.get('/individuals', async (req, res) => {
+    try {
+        const individuals = await db.any('SELECT * FROM individuals');
+        //console.log("Individuals fetched successfully:", individuals);
+        res.json(individuals);
+    } catch (err) {
+        console.error('Error fetching individuals:', err);
+        res.status(500).json({ error: 'Internal server error' });
+    }
+});
+
+
+
+
+
+
+
 // Start the server
 app.listen(PORT, () => {
     console.log(`Server is running on port ${PORT}`);
