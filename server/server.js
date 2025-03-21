@@ -16,6 +16,17 @@ app.get('/', (req, res) => {
     res.send('Animal Sighting Tracker API');
 });
 
+//All species
+app.get('/species', async (req, res) => {
+    try {
+      const species = await db.any('SELECT * FROM species');
+      res.json(species);
+    } catch (err) {
+      console.error('Error fetching species:', err);
+      res.status(500).json({ error: 'Internal server error' });
+    }
+  });
+  
 // Start the server
 app.listen(PORT, () => {
     console.log(`Server is running on port ${PORT}`);
