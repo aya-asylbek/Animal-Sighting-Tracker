@@ -1,6 +1,8 @@
 import { useState, useEffect } from 'react'
 import './App.css';
 
+//I see you have a database for individuals as well. 
+//Will you be building the fetch for that database route too? 
 
 function App() {
   //1: Create state for storing sightings and loading status
