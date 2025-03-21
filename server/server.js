@@ -2,7 +2,7 @@ import express, { json } from 'express';
 import cors from 'cors';
 import { config } from 'dotenv';
 import db from "./db.js";
-// Load env from .env file
+// Load data  from my .env file
 config();
 
 const app = express();
@@ -30,15 +30,17 @@ app.get('/species', async (req, res) => {
 
 // POST route to create a new species
 app.post('/species', async (req, res) => {
-    const { common_name, scientific_name, population_estimate, conservation_status } = req.body;
+    const { common_name, scientific_name, conservation_status } = req.body;
+    
+    if (!common_name || !scientific_name || !conservation_status) {
+        return res.status(400).json({ error: 'Missing required fields' });
+    }
 
     try {
-        // Inserting  the new species into the database
         await db.none(
-            'INSERT INTO species(common_name, scientific_name, population_estimate, conservation_status) VALUES($1, $2, $3, $4)',
-            [common_name, scientific_name, population_estimate, conservation_status]
+            'INSERT INTO species(common_name, scientific_name, conservation_status) VALUES($1, $2, $3)',
+            [common_name, scientific_name, conservation_status]
         );
-
         res.status(201).json({ message: 'Species added successfully' });
     } catch (err) {
         console.error('Error adding species:', err);
@@ -61,15 +63,17 @@ app.get('/individuals', async (req, res) => {
 
 // POST route to create a new individual
 app.post('/individuals', async (req, res) => {
-    const { nickname, species_id } = req.body;
+    const { nickname, species_id, scientist } = req.body;
+
+    if (!nickname || !species_id || !scientist) {
+        return res.status(400).json({ error: 'Missing required fields' });
+    }
 
     try {
-        // Insert the new individual into the database
         await db.none(
-            'INSERT INTO individuals(nickname, species_id) VALUES($1, $2)',
-            [nickname, species_id]
+            'INSERT INTO individuals(nickname, species_id, scientist) VALUES($1, $2, $3)',
+            [nickname, species_id, scientist]
         );
-
         res.status(201).json({ message: 'Individual added successfully' });
     } catch (err) {
         console.error('Error adding individual:', err);
@@ -77,11 +81,15 @@ app.post('/individuals', async (req, res) => {
     }
 });
 
-// Get all sightings
+
+// Get all sightings + adding nickname from individuals with join query
 app.get('/sightings', async (req, res) => {
     try {
-        const sightings = await db.any('SELECT * FROM sightings');
-        //console.log("Sightings fetched successfully:", sightings);
+        const sightings = await db.any(`
+            SELECT s.*, i.nickname 
+            FROM sightings s
+            JOIN individuals i ON s.individual_id = i.id
+        `);
         res.json(sightings);
     } catch (err) {
         console.error('Error fetching sightings:', err);
@@ -91,15 +99,13 @@ app.get('/sightings', async (req, res) => {
 
 // POST route to create a new sighting
 app.post('/sightings', async (req, res) => {
-    const { sighting_date, individual_id, location, healthy, sighter_email } = req.body;
+    const { sighting_time, individual_id, location, healthy, sighter_email } = req.body;
 
     try {
-        // Insert the new sighting into the database
         await db.none(
-            'INSERT INTO sightings(sighting_date, individual_id, location, healthy, sighter_email) VALUES($1, $2, $3, $4, $5)',
-            [sighting_date, individual_id, location, healthy, sighter_email]
+            'INSERT INTO sightings(sighting_time, individual_id, location, healthy, sighter_email) VALUES($1, $2, $3, $4, $5)',
+            [sighting_time, individual_id, location, healthy, sighter_email]
         );
-
         res.status(201).json({ message: 'Sighting added successfully' });
     } catch (err) {
         console.error('Error adding sighting:', err);
@@ -109,15 +115,25 @@ app.post('/sightings', async (req, res) => {
 
 
 
+// DELETE /sightings/:id - Delete a sighting by its ID
+app.delete('/sightings/:id', async (req, res) => {
+    const { id } = req.params;
+    try {
+        const result = await db.result('DELETE FROM sightings WHERE id = $1', [id]);
+        
+        if (result.rowCount === 0) {
+            return res.status(404).json({ message: 'Sighting not found' });
+        }
+        
+        res.json({ message: 'Sighting deleted successfully' });
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ error: 'Server error' });
+    }
+});
 
 
-
-
-
-
-
-
-// Start the server
+// Start my  server
 app.listen(PORT, () => {
     console.log(`Server is running on port ${PORT}`);
 });
