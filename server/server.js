@@ -40,6 +40,19 @@ app.get('/species', async (req, res) => {
     }
 });
 
+// Get all sightings
+app.get('/sightings', async (req, res) => {
+    try {
+        const sightings = await db.any('SELECT * FROM sightings');
+        //console.log("Sightings fetched successfully:", sightings);
+        res.json(sightings);
+    } catch (err) {
+        console.error('Error fetching sightings:', err);
+        res.status(500).json({ error: 'Internal server error' });
+    }
+});
+
+
 
 
 
