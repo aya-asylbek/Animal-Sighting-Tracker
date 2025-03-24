@@ -69,29 +69,21 @@ Download the PostgreSQL dump file from the repository.
 
 Create the database using the following command:
 
-bash
-Copy
-Edit
 createdb animal_sightings
+
 Restore the database from the dump file:
 
-bash
-Copy
-Edit
 psql animal_sighting < server/db/db_dump.sql
 3. Server Configuration
 Navigate to the server folder and install dependencies:
 
-bash
-Copy
-Edit
+
 cd server
 npm install
 Create a .env file in the server folder with the following content:
 
 env
-Copy
-Edit
+
 DB_USER=your_username
 DB_PASSWORD=your_password
 DB_HOST=localhost
@@ -100,25 +92,19 @@ DB_NAME=animal_sighting
 
 Start the server:
 
-bash
-Copy
-Edit
 npm start
 4. Client Setup
 Navigate to the client folder, install dependencies, and start the client:
 
-bash
-Copy
-Edit
 cd client
+
 npm install
+
 npm run dev
 Visit http://localhost:5173 in your browser.
 
 📁 Project Structure
-plaintext
-Copy
-Edit
+
 📦 animal-sighting-tracker
 ├── 📂 client/                # React frontend
 │   ├── 📂 src/              # Source files
@@ -129,47 +115,7 @@ Edit
 │   ├── 📂 scripts/         # Utility scripts
 │   └── 📄 package.json     # Backend dependencies
 └── 📄 README.md            # Documentation
-📊 Database Schema
-The application uses PostgreSQL with three main tables to track endangered species and sightings:
 
-Species Table
-sql
-Copy
-Edit
-CREATE TABLE species (
-    id SERIAL PRIMARY KEY,
-    commonName TEXT NOT NULL,
-    scientificName TEXT NOT NULL,
-    conservationStatus TEXT NOT NULL,
-    wildPopulation INT,
-    created_at TIMESTAMP DEFAULT NOW()
-);
-Individuals Table
-sql
-Copy
-Edit
-CREATE TABLE individuals (
-    id SERIAL PRIMARY KEY,
-    nickname VARCHAR(255) NOT NULL,
-    species_id INT NOT NULL,
-    created_at TIMESTAMP DEFAULT NOW(),
-    FOREIGN KEY (species_id) REFERENCES species(id) ON DELETE CASCADE
-);
-Sightings Table
-sql
-Copy
-Edit
-CREATE TABLE sightings (
-    id SERIAL PRIMARY KEY,
-    sighting_time TIMESTAMP NOT NULL,
-    individual_id INT NOT NULL,
-    location TEXT NOT NULL,
-    appeared_healthy BOOLEAN NOT NULL,
-    sighter_email VARCHAR(255) NOT NULL,
-    image_url TEXT,
-    created_at TIMESTAMP DEFAULT NOW(),
-    FOREIGN KEY (individual_id) REFERENCES individuals(id) ON DELETE CASCADE
-);
 🔌 API Endpoints
 Method	Endpoint	Description
 GET	/api/species	Retrieve all species
@@ -184,7 +130,7 @@ Frontend
 
 ⚡ Vite
 
-🎨 Modern CSS3
+🎨 Modern CSS
 
 📱 Responsive Design
 
@@ -197,37 +143,14 @@ Backend
 
 🔄 pg-promise
 
-👏 Attributions
-Color Palette: 🎨 Rainforest Pastels from Pastel Color Palettes
 
-Icons:
-
-🦁 Animal icons by Chattapat - Flaticon
-
-📸 Add img icons by Superndre - Flaticon
-
-✍️ Edit icons by Ranah Pixel Studio - Flaticon
-
-🔍 Search icons by Smashicons - Flaticon
-
-🗑️ Delete icons by Dreamcreateicons - Flaticon
-
-🫥 No icons by pocike - Flaticon
-
-Images: 🦁 Animal images sourced from Animalia.bio
-
-UI Components: 📑 Tabbed form container inspired by Rafaela Lucas's CodePen
 
 🧪 Testing
 Frontend Tests
-bash
-Copy
-Edit
+
 cd client && npm test
 Backend Tests
-bash
-Copy
-Edit
+
 cd server && npm test
 🤝 Contributing
 🔱 Fork the repository
