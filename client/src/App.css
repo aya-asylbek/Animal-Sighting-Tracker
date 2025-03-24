@@ -60,3 +60,78 @@ h1 {
   color: #7f8c8d;
   font-size: 0.9rem;
 }
+/* App.css */
+.app {
+  text-align: center;
+  padding: 20px;
+}
+
+.error {
+  color: red;
+}
+
+.loading {
+  color: blue;
+}
+
+.sightings-list {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+}
+
+.sighting-card {
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  padding: 10px;
+  margin: 10px;
+  width: 200px;
+  text-align: left;
+}
+
+.sighting-details {
+  font-size: 14px;
+}
+
+h2 {
+  font-size: 18px;
+  margin-bottom: 10px;
+}
+/* AddSightingForm.css */
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 10px; /* Reduced space between form fields */
+  margin-top: 10px; /* Reduced top margin */
+  max-width: 300px; /* Reduced max width of the form */
+  margin: 0 auto; /* Centered form horizontally */
+}
+
+label {
+  font-weight: bold;
+  font-size: 14px; /* Reduced font size for labels */
+}
+
+input[type="text"],
+input[type="email"],
+input[type="datetime-local"],
+button {
+  padding: 6px; /* Reduced padding inside input fields */
+  font-size: 14px; /* Reduced font size */
+  width: 100%; /* Full width inputs */
+  border-radius: 4px; /* Smaller border radius for inputs */
+  border: 1px solid #ccc; /* Lighter border color */
+}
+
+button {
+  background-color: #4CAF50;
+  color: white;
+  cursor: pointer;
+  border: none;
+  font-size: 14px; /* Reduced font size */
+  padding: 6px; /* Reduced padding for the button */
+}
+
+button:hover {
+  background-color: #45a049;
+}

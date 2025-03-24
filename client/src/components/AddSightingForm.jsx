@@ -68,17 +68,6 @@ const AddSightingForm = () => {
         />
       </label>
       <br />
-
-      <label>
-        Healthy:
-        <input
-          type="checkbox"
-          checked={formData.healthy}
-          onChange={(e) => setFormData({ ...formData, healthy: e.target.checked })}
-        />
-      </label>
-      <br />
-
       <label>
         Email of Scientist:
         <input
@@ -89,6 +78,17 @@ const AddSightingForm = () => {
           onChange={(e) => setFormData({ ...formData, sighter_email: e.target.value })}
         />
       </label>
+      <label>
+        Healthy:
+        <input
+          type="checkbox"
+          checked={formData.healthy}
+          onChange={(e) => setFormData({ ...formData, healthy: e.target.checked })}
+        />
+      </label>
+      <br />
+
+      
       <br />
 
       <button type="submit">Submit</button>
