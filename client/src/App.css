@@ -159,3 +159,12 @@ button:hover {
   max-width: 100%;
   margin: 0 auto;
 }
+
+body {
+  background-image: url('/assets/background.jpg');
+  background-size: cover;
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+}
+

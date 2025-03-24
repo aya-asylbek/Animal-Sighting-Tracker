@@ -2,6 +2,8 @@ import { useState, useEffect } from 'react'
 import AddSightingForm from './components/AddSightingForm';
 import AddIndividualForm from './components/AddIndividualForm';
 import AddSpeciesForm from './components/AddSpeciesForm';
+import backgroundImage from './assets/background.jpg';
+
 import './App.css';
 
 
