@@ -23,7 +23,7 @@ const AddSpeciesForm = () => {
         common_name: commonName,
         scientific_name: scientificName,
         conservation_status: conservationStatus,
-        population_estimate: populationEstimate
+        population_estimate: Number(populationEstimate) // sending as number 
       })
     });
 
