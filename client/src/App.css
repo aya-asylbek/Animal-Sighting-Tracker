@@ -135,3 +135,27 @@ button:hover {
   background-color: #45a049;
 }}
 
+
+.form-container {
+  display: flex;
+  justify-content: space-between;
+  max-width: 1200px;
+  margin: 20px auto; /* Center the form container */
+  gap: 20px; /* Space between the forms */
+}
+
+.form-wrapper {
+  width: 30%; /* Each form takes 30% of the container width */
+  padding: 10px;
+  box-sizing: border-box;
+}
+
+.form-wrapper h2 {
+  font-size: 16px;
+  margin-bottom: 10px;
+}
+
+.form-wrapper form {
+  max-width: 100%;
+  margin: 0 auto;
+}
