@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect } from 'react';
 import AddSightingForm from './components/AddSightingForm';
 import AddIndividualForm from './components/AddIndividualForm';
 import AddSpeciesForm from './components/AddSpeciesForm';
@@ -6,38 +6,39 @@ import backgroundImage from './assets/background.jpg';
 
 import './App.css';
 
-
 function App() {
-  //1: Create state for storing sightings and loading status
   const [sightings, setSightings] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState(null);
-  //2: Fetch data when component mounts
+
+  //2: FILTER 
+  const [showHealthy, setShowHealthy] = useState(false);
+
+  //3: Fetch data 
   useEffect(() => {
     const fetchSightings = async () => {
       try {
-        //3: Make API call to my backend
         const response = await fetch('http://localhost:5000/sightings');
         if (!response.ok) {
           throw new Error('Failed to fetch sightings');
         }
-        //4: Convert response to JSON
         const data = await response.json();
-        //5: Update state with fetched data
         setSightings(data);
         setIsLoading(false);
       } catch (err) {
-        //6: Handle errors
         setError(err.message);
         setIsLoading(false);
       }
     };
     fetchSightings();
-  }, []); 
-  
+  }, []);
 
+  // Filter healthy or no
+  const filteredSightings = showHealthy
+    ? sightings.filter((sighting) => sighting.healthy === true)
+    : sightings;
 
-  //delete function adding (will be on each card)
+  //delete button adding (will be on each card)
   const handleDelete = async (id) => {
     try {
       const response = await fetch(`http://localhost:5000/sightings/${id}`, {
@@ -54,28 +55,33 @@ function App() {
     }
   };
 
-  
-  
-  
-  
-  
-  
-  // Empty dependency array means this runs once on mount
-  //7: Render different states
   if (error) {
     return <div className="error">Error: {error}</div>;
   }
   if (isLoading) {
     return <div className="loading">Loading sightings...</div>;
   }
+
   return (
     <div className="app">
       <h1>Animal Sightings Tracker</h1>
 
+      {/* Healthy filter checkbox */}
+      <div className="filter">
+        <label>
+          <input
+            type="checkbox"
+            checked={showHealthy}
+            onChange={() => setShowHealthy(!showHealthy)}
+          />
+          Show only healthy animals
+        </label>
+      </div>
+
       {/* Sightings section on top */}
       <div className="sightings-container">
         <div className="sightings-list">
-          {sightings.map((sighting) => (
+          {filteredSightings.map((sighting) => (
             <div key={sighting.id} className="sighting-card">
               <h2>{sighting.nickname}</h2>
               <div className="sighting-details">
@@ -84,8 +90,7 @@ function App() {
                 <p>Health Status: {sighting.healthy ? 'Healthy' : 'Needs Attention'}</p>
                 <p>Reported by: {sighting.sighter_email}</p>
               </div>
-              {/* addind delete button for each my card sighting */}
-              <button onClick={() => handleDelete(sighting.id)}>Delete</button> 
+              <button onClick={() => handleDelete(sighting.id)}>Delete</button>
             </div>
           ))}
         </div>
@@ -113,4 +118,3 @@ function App() {
 }
 
 export default App;
-

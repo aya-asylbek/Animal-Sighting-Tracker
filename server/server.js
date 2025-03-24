@@ -82,20 +82,44 @@ app.post('/individuals', async (req, res) => {
 });
 
 
-// Get all sightings + adding nickname from individuals with join query
+// // Get all sightings + adding nickname from individuals with join query
+// app.get('/sightings', async (req, res) => {
+//     try {
+//         const sightings = await db.any(`
+//             SELECT s.*, i.nickname 
+//             FROM sightings s
+//             JOIN individuals i ON s.individual_id = i.id
+//         `);
+//         res.json(sightings);
+//     } catch (err) {
+//         console.error('Error fetching sightings:', err);
+//         res.status(500).json({ error: 'Internal server error' });
+//     }
+// });
+
 app.get('/sightings', async (req, res) => {
     try {
-        const sightings = await db.any(`
+        const { healthy } = req.query;
+        
+        let query = `
             SELECT s.*, i.nickname 
             FROM sightings s
             JOIN individuals i ON s.individual_id = i.id
-        `);
+        `;
+        
+        if (healthy) {
+            query += ` WHERE s.healthy = $1`;
+        }
+        
+        const sightings = await db.any(query, healthy === 'true' ? true : false);
+        
         res.json(sightings);
     } catch (err) {
         console.error('Error fetching sightings:', err);
         res.status(500).json({ error: 'Internal server error' });
     }
 });
+
 
 // POST route to create a new sighting
 app.post('/sightings', async (req, res) => {
