@@ -9,7 +9,7 @@ const AddIndividualForm = () => {
     event.preventDefault();
 
     // Make sure all fields are filled in 
-    if (!nickname || !scientist || !species) {
+    if (!nickname || !scientist || !species_id) {
       alert('Please fill in all fields');
       return;
     }
@@ -18,7 +18,7 @@ const AddIndividualForm = () => {
     const response = await fetch('http://localhost:5000/individuals', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ nickname, scientist, species })
+      body: JSON.stringify({ nickname, scientist, species_id })
     });
 
     if (response.ok) {
@@ -52,7 +52,7 @@ const AddIndividualForm = () => {
         placeholder="example - Dr. John Doe"
       />
 
-      <label htmlFor="species">Species</label>
+      <label htmlFor="species_id">Species ID</label>
       <input
         type="text"
         id="species"
@@ -60,7 +60,7 @@ const AddIndividualForm = () => {
         onChange={(e) => setSpecies(e.target.value)}
         required
         maxLength="50"
-        placeholder="example - Tiger"
+        placeholder="example - 7"
       />
 
       <button type="submit">Add Individual</button>

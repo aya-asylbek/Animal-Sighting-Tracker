@@ -62,7 +62,7 @@ Before you begin, ensure you have the following installed:
 #### 1. Clone & Navigate
 
 ```bash
-git clone <your-repo-url>
+git clone https://github.com/aya-asylbek/Animal-Sighting-Tracker
 cd animal-sighting-tracker
 2. Database Setup
 To set up the database, you can use my PostgreSQL dump file for an easy setup.
@@ -105,18 +105,6 @@ npm install
 npm run dev
 Visit http://localhost:5173 in your browser.
 
-📁 Project Structure
-
-📦 animal-sighting-tracker
-├── 📂 client/                # React frontend
-│   ├── 📂 src/              # Source files
-│   ├── 📂 public/           # Static files
-│   └── 📄 package.json      # Frontend dependencies
-├── 📂 server/               # Express backend
-│   ├── 📂 db/              # Database scripts
-│   ├── 📂 scripts/         # Utility scripts
-│   └── 📄 package.json     # Backend dependencies
-└── 📄 README.md            # Documentation
 
 🔌 API Endpoints
 Method	Endpoint	Description
