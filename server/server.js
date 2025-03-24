@@ -31,7 +31,7 @@ app.get('/species', async (req, res) => {
 // POST route to create a new species
 app.post('/species', async (req, res) => {
     const { common_name, scientific_name, conservation_status } = req.body;
-    
+
     if (!common_name || !scientific_name || !conservation_status) {
         return res.status(400).json({ error: 'Missing required fields' });
     }
@@ -100,15 +100,15 @@ app.get('/sightings', async (req, res) => {
 // POST route to create a new sighting
 app.post('/sightings', async (req, res) => {
     const { sighting_time, individual_id, location, healthy, sighter_email } = req.body;
- // ✅ Add required field validation and check
- if (!sighting_time || !individual_id || !location || !sighter_email) {
-    return res.status(400).json({ error: 'Missing required fields' });
-}
+    //  Add required field validation and check
+    if (!sighting_time || !individual_id || !location || !sighter_email) {
+        return res.status(400).json({ error: 'Missing required fields' });
+    }
 
-// ✅ Add email format validation , ifno by format then error 
-if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(sighter_email)) {
-    return res.status(400).json({ error: 'Invalid email format' });
-}
+    //  Add email format validation , ifno by format then error 
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(sighter_email)) {
+        return res.status(400).json({ error: 'Invalid email format' });
+    }
     try {
         await db.none(
             'INSERT INTO sightings(sighting_time, individual_id, location, healthy, sighter_email) VALUES($1, $2, $3, $4, $5)',
@@ -128,11 +128,11 @@ app.delete('/sightings/:id', async (req, res) => {
     const { id } = req.params;
     try {
         const result = await db.result('DELETE FROM sightings WHERE id = $1', [id]);
-        
+
         if (result.rowCount === 0) {
             return res.status(404).json({ message: 'Sighting not found' });
         }
-        
+
         res.json({ message: 'Sighting deleted successfully' });
     } catch (error) {
         console.error(error);
