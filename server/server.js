@@ -100,7 +100,15 @@ app.get('/sightings', async (req, res) => {
 // POST route to create a new sighting
 app.post('/sightings', async (req, res) => {
     const { sighting_time, individual_id, location, healthy, sighter_email } = req.body;
+ // ✅ Add required field validation and check
+ if (!sighting_time || !individual_id || !location || !sighter_email) {
+    return res.status(400).json({ error: 'Missing required fields' });
+}
 
+// ✅ Add email format validation , ifno by format then error 
+if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(sighter_email)) {
+    return res.status(400).json({ error: 'Invalid email format' });
+}
     try {
         await db.none(
             'INSERT INTO sightings(sighting_time, individual_id, location, healthy, sighter_email) VALUES($1, $2, $3, $4, $5)',
