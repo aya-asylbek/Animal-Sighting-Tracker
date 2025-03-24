@@ -1,136 +1,244 @@
-Animal Sighting Tracker 🦓🐆
-Overview 🌍
-Welcome to the Animal Sighting Tracker! This web application allows users to log and track animal sightings in their area. It enables the addition of individual animals, species, and sightings, while also offering a dynamic way to manage and view records. With a clean, responsive interface, the app makes it easy for users to report sightings, ensuring that data is collected in an organized manner.
+# 🦁 Animal Sighting Tracker
 
-Key Features 🔑:
-Add Animal Sightings 📝: Easily log new sightings with important details, including the date, location, health status, and more.
+**React Vite PostgreSQL Express Node.js**
 
-Manage Species & Individuals 🦓: Track individual animals and species, and update their information as needed.
+A full-stack PERN (PostgreSQL, Express, React, Node.js) application for tracking endangered animal species, individuals, and sightings. Built with modern web technologies and a focus on user experience.
 
-View Sightings 👀: View a detailed list of all sightings, with the option to delete records.
+🌍 **About Endangered Species**  
+An endangered species is one that is at high risk of extinction in the near future, either globally or within a specific region. Species become endangered due to factors such as habitat destruction, poaching, climate change, and invasive species. Conservation efforts, including legal protections, habitat restoration, and captive breeding programs, aim to prevent extinction.
 
-Responsive Design 📱: The app is mobile-friendly, ensuring a great experience on both desktops and mobile devices.
+**Conservation Status Categories**  
+The International Union for Conservation of Nature (IUCN) Red List is the most recognized system for assessing species' conservation status:
 
-Demo 🎥
-Click here to view the demo
+| Status                   | Description                        |
+|--------------------------|------------------------------------|
+| 🦣 Extinct (EX)           | No individuals remain              |
+| 🌍 Extinct in the Wild (EW) | Only survive in captivity          |
+| 🐅 Critically Endangered (CR) | Extremely high risk of extinction |
+| 🦓 Endangered (EN)        | Very high risk of extinction       |
+| 🦘 Vulnerable (VU)        | High risk of extinction            |
+| 🦒 Near Threatened (NT)   | Close to becoming threatened       |
+| 🦄 Least Concern (LC)     | No immediate risk                  |
 
-Table of Contents 📚
-Installation
+Over 195 countries have committed to protecting endangered species through biodiversity action plans and conservation programs.
 
-Usage
+---
 
-Project Structure
+## ✨ Features
 
-Technologies Used
+### 🦊 Species Management
+- Track endangered species with detailed information
+- Monitor conservation status and population data
+- Scientific and common name tracking
 
-Database Setup
+### 🐘 Individual Tracking
+- Monitor specific animals within each species
+- Track individual histories and characteristics
+- Link individuals to their species data
 
-Contributing
+### 📸 Sighting Records
+- Record and manage animal sightings
+- Location tracking with flexible format
+- Health status monitoring
+- Image upload capabilities
 
-License
+---
 
-Installation 🚀
-To run this project locally, follow the steps below:
+## 🚀 Getting Started
 
-Clone the repository:
+### 📦 Prerequisites
 
-bash
-Copy
-Edit
-git clone https://github.com/yourusername/animal-sighting-tracker.git
-Navigate to the project directory:
+Before you begin, ensure you have the following installed:
+- **Node.js** (v16 or higher) [Download Node.js](https://nodejs.org/en/download/)
+- **PostgreSQL** (v12 or higher) [Download PostgreSQL](https://www.postgresql.org/download/)
+- **Vite** [Download Vite](https://vitejs.dev/)
 
-bash
-Copy
-Edit
+---
+
+### 🔄 Quick Start Guide
+
+#### 1. Clone & Navigate
+
+```bash
+git clone <your-repo-url>
 cd animal-sighting-tracker
-Install dependencies: Install the required packages with npm:
+2. Database Setup
+To set up the database, you can use my PostgreSQL dump file for an easy setup.
 
-bash
-Copy
-Edit
-npm install
-Start the development server: To run the app locally, use the following command:
+Download the PostgreSQL dump file from the repository.
 
-bash
-Copy
-Edit
-npm start
-The app should now be running on http://localhost:5000.
-
-Usage 📋
-Once the application is up and running, you can:
-
-Add new sightings 🦒: Click on the "Add Sighting" form to input new sightings along with relevant information.
-
-Track species and individuals 🐅: Use the forms at the bottom to add new species or individual animals.
-
-View sightings 👁️: View the sightings in a dynamic list, with the option to delete any sighting you no longer need.
-
-Explore the background 🌄: The site features a beautiful background image, enhancing the user experience.
-
-Database Setup 🗄️
-This project uses a PostgreSQL database to store the sightings and species information. If you want to set up the database locally, follow these steps:
-
-Install PostgreSQL: If you haven't installed PostgreSQL, you can follow these instructions for your platform.
-
-Create a new database: Open your terminal or command line and run the following command to create a new database:
+Create the database using the following command:
 
 bash
 Copy
 Edit
 createdb animal_sightings
-Restore from pg_dump: We’ve included a pg_dump file that contains a backup of the database schema and sample data. To restore the database from the dump, run:
+Restore the database from the dump file:
 
 bash
 Copy
 Edit
-pg_restore -U yourusername -d animal_sightings path/to/pg_dump_file.dump
-Replace yourusername with your PostgreSQL username and path/to/pg_dump_file.dump with the path to the pg_dump file in your project.
+psql animal_sighting < server/db/db_dump.sql
+3. Server Configuration
+Navigate to the server folder and install dependencies:
 
-Configure the Backend: Make sure your backend is correctly configured to connect to the PostgreSQL database. You may need to update the database connection URL in your backend configuration (e.g., config.js or .env file) with the appropriate details.
+bash
+Copy
+Edit
+cd server
+npm install
+Create a .env file in the server folder with the following content:
 
-Project Structure 🗂️
+env
+Copy
+Edit
+DB_USER=your_username
+DB_PASSWORD=your_password
+DB_HOST=localhost
+DB_PORT=5432
+DB_NAME=animal_sighting
+
+Start the server:
+
+bash
+Copy
+Edit
+npm start
+4. Client Setup
+Navigate to the client folder, install dependencies, and start the client:
+
+bash
+Copy
+Edit
+cd client
+npm install
+npm run dev
+Visit http://localhost:5173 in your browser.
+
+📁 Project Structure
 plaintext
 Copy
 Edit
-animal-sighting-tracker/
-├── client/                  # Frontend code
-│   ├── public/              # Public assets (index.html, etc.)
-│   └── src/                 # React components and styles
-│       ├── assets/          # Static assets (e.g., background images)
-│       ├── components/      # Reusable React components
-│       ├── App.css          # Main CSS file
-│       └── App.jsx          # Main React component
-└── server/                  # Backend code (if applicable)
-    ├── routes/              # API routes
-    └── models/              # Database models
-Technologies Used 💻
-Frontend: React.js, CSS
+📦 animal-sighting-tracker
+├── 📂 client/                # React frontend
+│   ├── 📂 src/              # Source files
+│   ├── 📂 public/           # Static files
+│   └── 📄 package.json      # Frontend dependencies
+├── 📂 server/               # Express backend
+│   ├── 📂 db/              # Database scripts
+│   ├── 📂 scripts/         # Utility scripts
+│   └── 📄 package.json     # Backend dependencies
+└── 📄 README.md            # Documentation
+📊 Database Schema
+The application uses PostgreSQL with three main tables to track endangered species and sightings:
 
-Backend: Node.js, Express.js (Optional: If you have a backend for managing the sightings and species)
+Species Table
+sql
+Copy
+Edit
+CREATE TABLE species (
+    id SERIAL PRIMARY KEY,
+    commonName TEXT NOT NULL,
+    scientificName TEXT NOT NULL,
+    conservationStatus TEXT NOT NULL,
+    wildPopulation INT,
+    created_at TIMESTAMP DEFAULT NOW()
+);
+Individuals Table
+sql
+Copy
+Edit
+CREATE TABLE individuals (
+    id SERIAL PRIMARY KEY,
+    nickname VARCHAR(255) NOT NULL,
+    species_id INT NOT NULL,
+    created_at TIMESTAMP DEFAULT NOW(),
+    FOREIGN KEY (species_id) REFERENCES species(id) ON DELETE CASCADE
+);
+Sightings Table
+sql
+Copy
+Edit
+CREATE TABLE sightings (
+    id SERIAL PRIMARY KEY,
+    sighting_time TIMESTAMP NOT NULL,
+    individual_id INT NOT NULL,
+    location TEXT NOT NULL,
+    appeared_healthy BOOLEAN NOT NULL,
+    sighter_email VARCHAR(255) NOT NULL,
+    image_url TEXT,
+    created_at TIMESTAMP DEFAULT NOW(),
+    FOREIGN KEY (individual_id) REFERENCES individuals(id) ON DELETE CASCADE
+);
+🔌 API Endpoints
+Method	Endpoint	Description
+GET	/api/species	Retrieve all species
+POST	/api/species	Add a new species
+GET	/api/individuals	Retrieve all individuals
+POST	/api/individuals	Add a new individual
+GET	/api/sightings	Retrieve all sightings
+POST	/api/sightings	Add a new sighting
+🛠️ Tech Stack
+Frontend
+⚛️ React
 
-State Management: React useState and useEffect
+⚡ Vite
 
-Package Manager: npm
+🎨 Modern CSS3
 
-Database: PostgreSQL
+📱 Responsive Design
 
-Other Tools: Vite (for faster development), Babel (for compiling JS), Fetch API (for fetching data)
+Backend
+🟢 Node.js
 
-Contributing 🤝
-We welcome contributions! Feel free to fork the project, submit issues, and create pull requests to improve the app. Here’s how you can contribute:
+⚡ Express
 
-Fork the repository.
+🐘 PostgreSQL
 
-Create a new branch: git checkout -b feature-branch
+🔄 pg-promise
 
-Make your changes and commit them: git commit -am 'Add new feature'
+👏 Attributions
+Color Palette: 🎨 Rainforest Pastels from Pastel Color Palettes
 
-Push to the branch: git push origin feature-branch
+Icons:
 
-Create a pull request from your fork to this repository.
+🦁 Animal icons by Chattapat - Flaticon
 
+📸 Add img icons by Superndre - Flaticon
 
-License 📄
+✍️ Edit icons by Ranah Pixel Studio - Flaticon
+
+🔍 Search icons by Smashicons - Flaticon
+
+🗑️ Delete icons by Dreamcreateicons - Flaticon
+
+🫥 No icons by pocike - Flaticon
+
+Images: 🦁 Animal images sourced from Animalia.bio
+
+UI Components: 📑 Tabbed form container inspired by Rafaela Lucas's CodePen
+
+🧪 Testing
+Frontend Tests
+bash
+Copy
+Edit
+cd client && npm test
+Backend Tests
+bash
+Copy
+Edit
+cd server && npm test
+🤝 Contributing
+🔱 Fork the repository
+
+🌿 Create your feature branch (git checkout -b feature/AmazingFeature)
+
+💾 Commit your changes (git commit -m 'Add some AmazingFeature')
+
+📤 Push to the branch (git push origin feature/AmazingFeature)
+
+🎯 Open a Pull Request
+
+📄 License
 This project is licensed under the MIT License - see the LICENSE file for details.
