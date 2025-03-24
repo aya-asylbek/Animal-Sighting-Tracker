@@ -60,7 +60,7 @@ h1 {
   color: #7f8c8d;
   font-size: 0.9rem;
 }
-/* App.css */
+/* for App.css */
 .app {
   text-align: center;
   padding: 20px;
@@ -97,30 +97,30 @@ h2 {
   font-size: 18px;
   margin-bottom: 10px;
 }
-/* AddSightingForm.css */
+/* for my form AddSightingForm.css */
 form {
   display: flex;
   flex-direction: column;
-  gap: 10px; /* Reduced space between form fields */
-  margin-top: 10px; /* Reduced top margin */
-  max-width: 300px; /* Reduced max width of the form */
-  margin: 0 auto; /* Centered form horizontally */
+  gap: 10px;
+  margin-top: 10px; 
+  max-width: 300px;
+  margin: 0 auto; 
 }
 
 label {
   font-weight: bold;
-  font-size: 14px; /* Reduced font size for labels */
+  font-size: 14px; 
 }
 
 input[type="text"],
 input[type="email"],
 input[type="datetime-local"],
 button {
-  padding: 6px; /* Reduced padding inside input fields */
-  font-size: 14px; /* Reduced font size */
-  width: 100%; /* Full width inputs */
-  border-radius: 4px; /* Smaller border radius for inputs */
-  border: 1px solid #ccc; /* Lighter border color */
+  padding: 6px; 
+  font-size: 14px;
+  width: 100%; 
+  border-radius: 4px;
+  border: 1px solid #ccc; 
 }
 
 button {
@@ -128,10 +128,10 @@ button {
   color: white;
   cursor: pointer;
   border: none;
-  font-size: 14px; /* Reduced font size */
-  padding: 6px; /* Reduced padding for the button */
-}
+  font-size: 14px; 
+  padding: 6px; 
 
 button:hover {
   background-color: #45a049;
-}
+}}
+

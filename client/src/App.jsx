@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react'
 import AddSightingForm from './components/AddSightingForm';
+import AddIndividualForm from './components/AddIndividualForm';
 import './App.css';
 
 
@@ -37,30 +38,66 @@ function App() {
   if (isLoading) {
     return <div className="loading">Loading sightings...</div>;
   }
-  //8: Render main content (data of my sightings + nickname)
+
   return (
     <div className="app">
       <h1>Animal Sightings Tracker</h1>
-      <h2>Add sighting</h2>
-      <AddSightingForm />
-      <div className="sightings-list">
-        {sightings.map((sighting) => (
-          <div key={sighting.id} className="sighting-card">
-            <h2>{sighting.nickname}</h2>
-            <div className="sighting-details">
-              <p>Date: {new Date(sighting.sighting_time).toLocaleDateString()}</p>
-              <p>Location: {sighting.location}</p>
-              <p>Health Status: {sighting.healthy ? 'Healthy' : 'Needs Attention'}</p>
-              <p>Reported by: {sighting.sighter_email}</p>
-            </div>
-          </div>
-        ))}
+      <div className="form-container">
+        <h2>Add a new individual</h2>
+        <AddIndividualForm />
+        <h2>Add sighting</h2>
+        <AddSightingForm />
       </div>
-     
+      <div className="sightings-container">
+        <div className="sightings-list">
+          {sightings.map((sighting) => (
+            <div key={sighting.id} className="sighting-card">
+              <h2>{sighting.nickname}</h2>
+              <div className="sighting-details">
+                <p>Date: {new Date(sighting.sighting_time).toLocaleDateString()}</p>
+                <p>Location: {sighting.location}</p>
+                <p>Health Status: {sighting.healthy ? 'Healthy' : 'Needs Attention'}</p>
+                <p>Reported by: {sighting.sighter_email}</p>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
     </div>
   );
 }
+
 export default App;
+
+
+
+
+  //8: Render main content (data of my sightings + nickname)
+//   return (
+//     <div className="app">
+//       <h1>Animal Sightings Tracker</h1>
+//       <h2>Add sighting</h2>
+//       <AddSightingForm />
+//       <h2>Add a new individual</h2>
+//       <AddIndividualForm/>
+//       <div className="sightings-list">
+//         {sightings.map((sighting) => (
+//           <div key={sighting.id} className="sighting-card">
+//             <h2>{sighting.nickname}</h2>
+//             <div className="sighting-details">
+//               <p>Date: {new Date(sighting.sighting_time).toLocaleDateString()}</p>
+//               <p>Location: {sighting.location}</p>
+//               <p>Health Status: {sighting.healthy ? 'Healthy' : 'Needs Attention'}</p>
+//               <p>Reported by: {sighting.sighter_email}</p>
+//             </div>
+//           </div>
+//         ))}
+//       </div>
+
+//     </div>
+//   );
+// }
+// export default App;
 
 
 
