@@ -31,7 +31,34 @@ function App() {
       }
     };
     fetchSightings();
-  }, []); // Empty dependency array means this runs once on mount
+  }, []); 
+  
+
+
+  //delete function adding (will be on each card)
+  const handleDelete = async (id) => {
+    try {
+      const response = await fetch(`http://localhost:5000/sightings/${id}`, {
+        method: 'DELETE',
+      });
+
+      if (!response.ok) {
+        throw new Error('Failed to delete sighting');
+      }
+
+      setSightings(sightings.filter(sighting => sighting.id !== id));
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  
+  
+  
+  
+  
+  
+  // Empty dependency array means this runs once on mount
   //7: Render different states
   if (error) {
     return <div className="error">Error: {error}</div>;
@@ -55,6 +82,8 @@ function App() {
                 <p>Health Status: {sighting.healthy ? 'Healthy' : 'Needs Attention'}</p>
                 <p>Reported by: {sighting.sighter_email}</p>
               </div>
+              {/* addind delete button for each my card sighting */}
+              <button onClick={() => handleDelete(sighting.id)}>Delete</button> 
             </div>
           ))}
         </div>
