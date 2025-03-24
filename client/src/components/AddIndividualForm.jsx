@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 const AddIndividualForm = () => {
   const [nickname, setNickname] = useState('');
   const [scientist, setScientist] = useState('');
-  const [species, setSpecies] = useState('');
+  const [species_id, setSpecies_id] = useState('');
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -56,8 +56,8 @@ const AddIndividualForm = () => {
       <input
         type="text"
         id="species"
-        value={species}
-        onChange={(e) => setSpecies(e.target.value)}
+        value={species_id}
+        onChange={(e) => setSpecies_id(e.target.value)}
         required
         maxLength="50"
         placeholder="example - 7"

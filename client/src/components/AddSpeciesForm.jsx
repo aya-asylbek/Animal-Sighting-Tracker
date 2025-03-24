@@ -4,13 +4,13 @@ const AddSpeciesForm = () => {
   const [commonName, setCommonName] = useState('');
   const [scientificName, setScientificName] = useState('');
   const [conservationStatus, setConservationStatus] = useState('');
-  const [estimatedPopulation, setEstimatedPopulation] = useState('');
+  const [populationEstimate, setPopulationEstimate] = useState('');
 
   const handleSubmit = async (event) => {
     event.preventDefault();
 
     // If not add  required fields ,will not work
-    if (!commonName || !scientificName || !conservationStatus || !estimatedPopulation) {
+    if (!commonName || !scientificName || !conservationStatus || !populationEstimate) {
       alert('Please fill in all fields');
       return;
     }
@@ -23,7 +23,7 @@ const AddSpeciesForm = () => {
         common_name: commonName,
         scientific_name: scientificName,
         conservation_status: conservationStatus,
-        estimated_population: estimatedPopulation
+        population_estimate: populationEstimate
       })
     });
 
@@ -69,12 +69,12 @@ const AddSpeciesForm = () => {
         placeholder="example - CR, EN, LC"
       />
 
-      <label htmlFor="estimatedPopulation">Estimated Population in the Wild</label>
+      <label htmlFor="population_estimate">Estimated Population in the Wild</label>
       <input
         type="number"
-        id="estimatedPopulation"
-        value={estimatedPopulation}
-        onChange={(e) => setEstimatedPopulation(e.target.value)}
+        id="population_estimate"
+        value={populationEstimate}
+        onChange={(e) => setPopulationEstimate(e.target.value)}
         required
         min="1"
         placeholder="example - 3000"

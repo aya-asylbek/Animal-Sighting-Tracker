@@ -30,16 +30,16 @@ app.get('/species', async (req, res) => {
 
 // POST route to create a new species
 app.post('/species', async (req, res) => {
-    const { common_name, scientific_name, conservation_status } = req.body;
+    const { common_name, scientific_name, conservation_status ,population_estimate } = req.body;
 
-    if (!common_name || !scientific_name || !conservation_status) {
+    if (!common_name || !scientific_name || !conservation_status|| !population_estimate) {
         return res.status(400).json({ error: 'Missing required fields' });
     }
 
     try {
         await db.none(
-            'INSERT INTO species(common_name, scientific_name, conservation_status) VALUES($1, $2, $3)',
-            [common_name, scientific_name, conservation_status]
+            'INSERT INTO species(common_name, scientific_name, conservation_status ,population_estimate) VALUES($1, $2, $3 ,$4)',
+            [common_name, scientific_name, conservation_status,population_estimate]
         );
         res.status(201).json({ message: 'Species added successfully' });
     } catch (err) {
@@ -82,20 +82,7 @@ app.post('/individuals', async (req, res) => {
 });
 
 
-// // Get all sightings + adding nickname from individuals with join query
-// app.get('/sightings', async (req, res) => {
-//     try {
-//         const sightings = await db.any(`
-//             SELECT s.*, i.nickname 
-//             FROM sightings s
-//             JOIN individuals i ON s.individual_id = i.id
-//         `);
-//         res.json(sightings);
-//     } catch (err) {
-//         console.error('Error fetching sightings:', err);
-//         res.status(500).json({ error: 'Internal server error' });
-//     }
-// });
+// // Get all sightings + adding nickname from individuals with join query and checkin if healthy
 
 app.get('/sightings', async (req, res) => {
     try {
