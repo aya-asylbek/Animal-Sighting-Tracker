@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react'
 import AddSightingForm from './components/AddSightingForm';
 import AddIndividualForm from './components/AddIndividualForm';
+import AddSpeciesForm from './components/AddSpeciesForm';
 import './App.css';
 
 
@@ -47,6 +48,8 @@ function App() {
         <AddIndividualForm />
         <h2>Add sighting</h2>
         <AddSightingForm />
+        <h2>Add a new species</h2>
+        <AddSpeciesForm />
       </div>
       <div className="sightings-container">
         <div className="sightings-list">

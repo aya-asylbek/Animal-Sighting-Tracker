@@ -38,7 +38,7 @@ const AddIndividualForm = () => {
         onChange={(e) => setNickname(e.target.value)}
         required
         maxLength="50"
-        placeholder="e.g. Prickly Petunia"
+        placeholder="example - Prickly Petunia"
       />
 
       <label htmlFor="scientist">Scientist Tracking Animal</label>
@@ -49,7 +49,7 @@ const AddIndividualForm = () => {
         onChange={(e) => setScientist(e.target.value)}
         required
         maxLength="50"
-        placeholder="e.g. Dr. John Doe"
+        placeholder="example - Dr. John Doe"
       />
 
       <label htmlFor="species">Species</label>
@@ -60,7 +60,7 @@ const AddIndividualForm = () => {
         onChange={(e) => setSpecies(e.target.value)}
         required
         maxLength="50"
-        placeholder="e.g. Tiger"
+        placeholder="example - Tiger"
       />
 
       <button type="submit">Add Individual</button>
